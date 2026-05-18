@@ -1,0 +1,77 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\title{Síntesis Avanzada: Hitos en la Historia de la Probabilidad\\ \large Basado en la conferencia de Yuval Peres en BIMSA}
+\author{Leonardo Daniel Velazquez Garcia}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este documento presenta una formalización en \LaTeX\ de la síntesis cronológica y conceptual de la conferencia impartida por el Prof. Yuval Peres en el \textit{Beijing Institute of Mathematical Sciences and Applications} (BIMSA). Se detallan los procesos de rigurización clásica, fluctuaciones asintóticas, cálculo estocástico e invarianza conforme.
+\end{abstract}
+
+\section{Fundaciones Teóricas y Rigurización (1900--1933)}
+
+\subsection{El 6.\textordmasculine\ Problema de Hilbert}
+En el año 1900, David Hilbert planteó la necesidad de axiomatizar y dotar de rigor matemático a la física (mecánica) y a la probabilidad. Hasta ese momento, la disciplina operaba primordialmente mediante combinatoria discreta o aproximaciones heurísticas carentes de un soporte analítico general.
+
+\subsection{Émile Borel y los Números Normales (1909)}
+Émile Borel introdujo enunciados asintóticos fuertes en el intervalo unitario $[0,1]$. Demostró que, bajo la medida de Lebesgue, casi todo número real es numéricamente normal. Sea $X \in [0,1]$ expresado en base $B$:
+\[ X = 0.d_1 d_2 d_3 \dots \]
+La frecuencia límite de aparición de cualquier dígito específico $D \in \{0, \dots, B-1\}$ en los primeros $n$ dígitos satisface:
+\[ \lim_{n \to \infty} \frac{N_n(D)}{n} = \frac{1}{B} \]
+con probabilidad $1$. Borel denotó la paradoja de la existencia frente a la construcción: el conjunto de números normales posee medida uno completa, pero explicitar un solo dígito analítico que sea simultáneamente normal para todas las bases continúa siendo un problema abierto de alta complejidad estructural.
+
+\subsection{Axiomatización de Kolmogorov (1933)}
+Andrey Kolmogorov resolvió el dilema de Hilbert fundando la probabilidad sobre la teoría de la medida en espacios abstractos $(\Omega, \mathcal{F}, \mathbb{P})$. De su obra destacan dos herramientas angulares:
+\begin{enumerate}
+    \item \textbf{Desigualdad Maximal de Kolmogorov:} Una extensión sustancial de la desigualdad de Chebyshev para controlar las fluctuaciones temporales máximas de una caminata aleatoria. Sean $X_1, \dots, X_n$ variables aleatorias independientes con medias cero y varianzas finitas, y sea $S_k = \sum_{i=1}^k X_i$. Entonces, para cualquier $\lambda > 0$:
+    \begin{equation}
+    \mathbb{P}\left(\max_{1 \le k \le n} |S_k| \ge \lambda\right) \le \frac{\text{Var}(S_n)}{\lambda^2}
+    \end{equation}
+    \item \textbf{Ley Fuerte de los Números Grandes:} Kolmogorov determinó que la condición matemática afilada y necesaria para la convergencia casi segura del promedio $\frac{S_n}{n} \to \mathbb{E}[X]$ es la integrabilidad de primer orden, es decir, $\mathbb{E}[|X|] < \infty$.
+\end{enumerate}
+
+\section{Fluctuación Asintótica y Cálculo Estocástico}
+
+\subsection{La Ley del Logaritmo Iterado (LIL) de Khinchin (1924)}
+Aleksandr Khinchin determinó el límite de fluctuación exacto para el comportamiento extremal de una caminata aleatoria simétrica $S_n = \sum_{i=1}^n X_i$, donde $\mathbb{P}(X_i = \pm 1) = 1/2$. Demostró que:
+\begin{equation}
+\limsup_{n\to\infty} \frac{S_n}{\sqrt{2n \log \log n}} = 1 \quad \text{casi seguramente (c.s.)}
+\end{equation}
+Su metodología innovadora consistió en evaluar la caminata en una escala temporal geométrica exponencial ($n = 2^k$) acoplada a cotas de grandes desviaciones (concentración de la medida).
+
+\subsection{El Método de Reemplazo de Lindeberg (1922)}
+Jarl Waldemar Lindeberg propuso una demostración elemental del Teorema Central del Límite (TCL) sin recurrir a transformadas de Fourier. El método reemplaza de manera iterativa cada variable independiente $X_i$ por una variable gaussiana estándar $Z_i \sim \mathcal{N}(0,1)$. Utilizando una expansión en serie de Taylor de tercer orden para una función de prueba suave $f \in C^3$ con tercera derivada acotada:
+\[ f(y+x) = f(y) + x f'(y) + \frac{x^2}{2} f''(y) + \frac{x^3}{6} f'''(\xi) \]
+Lindeberg emparejó los primeros dos momentos ($\mathbb{E}[X_i] = \mathbb{E}[Z_i] = 0$ y $\mathbb{E}[X_i^2] = \mathbb{E}[Z_i^2] = 1$), anulando los términos lineales y cuadráticos de la diferencia de expectativas. El error global acumulado tras $n$ pasos se desvanece a un ritmo de $O(n^{-1/2})$.
+
+\subsection{Movimiento Browniano y el Cálculo de It\^o}
+Norbert Wiener formalizó rigurosamente el proceso estocástico continuo del movimiento Browniano ($B_t$). No obstante, Paley y Zygmund demostraron que las trayectorias típicas de $B_t$ son casi seguramente no diferenciables en ningún punto. Esto invalidaba el cálculo diferencial clásico de Riemann-Stieltjes, forzando a Kiyosi It\^o a desarrollar la integral estocástica y su célebre lema con corrección de segundo orden debido a la variación cuadrática $\text{d}B_t^2 = \text{d}t$:
+\begin{equation}
+\text{d}f(B_t) = f'(B_t)\text{d}B_t + \frac{1}{2}f''(B_t)\text{d}t
+\end{equation}
+
+\section{Geometría Probabilística y Recurrencia}
+
+\subsection{El Teorema de Régimen de Pólya (1921)}
+George Pólya resolvió el comportamiento asintótico de una caminata aleatoria simple sobre el retículo d-dimensional $\mathbb{Z}^d$. El proceso es recurrente si y solo si $d \in \{1, 2\}$. Para $d \ge 3$, el proceso se vuelve transitorio:
+\[ \mathbb{P}(\text{retorno al origen infinitas veces}) = \begin{cases} 1 & \text{si } d = 1, 2 \\ < 1 & \text{si } d \ge 3 \end{cases} \]
+
+\subsection{Redes en Peine (\textit{Comb Lattice})}
+Peres discutió sus investigaciones de 2004 sobre la geometría de colisiones. En una estructura de grafo en peine (un subgrafo de $\mathbb{Z}^2$ donde se retiene el eje $X$ pero solo líneas verticales aisladas), la caminata unipartícula sigue siendo recurrente. Sin embargo, dos caminatas independientes iniciadas simultáneamente intersecan sus trayectorias físicas en el espacio-tiempo sólo un número finito de veces casi seguramente, ilustrando que la recurrencia no implica colisiones infinitas para sistemas multi-partícula.
+
+\subsection{Invarianza Conforme y SLE}
+A nivel crítico, Paul Lévy estableció que el movimiento Browniano en $\mathbb{R}^2$ exhibe invarianza conforme. Más tarde, Stanislav Smirnov demostró la invarianza conforme de la percolación crítica en el retículo triangular, validando de forma rigurosa la fórmula hidrodinámica de Cardy. Este avance permitió el nacimiento de la Evolución de Schramm-Loewner (\text{SLE}$_\kappa$), un método geométrico paramétrico introducido por Oded Schramm para trazar curvas e interfaces críticas planas interconectadas con el soporte del movimiento Browniano continuo.
+
+\end{document}

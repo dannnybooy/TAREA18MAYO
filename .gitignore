@@ -1,0 +1,14 @@
+# Archivos auxiliares de LaTeX
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Archivos de entorno virtual y caché de Python
+__pycache__/
+*.pyc
+venv/
+.venv/
